@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Cadastro de produtos</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <form method="post" action="salvar_produtos.jsp">
+            <p>
+                <label for="txtCod">Código:</label>
+                <input type="text" name="txtCod" id="txtCod">
+            </p>
+            <p>
+                <label for="txtNome">Nome do produto:</label>
+                <input type="text" name="txtNome" id="txtNome" size="50" maxlength="50">
+            </p>
+            <p>
+                <label for="txtMarca">Marca do produto:</label>
+                <input type="text" name="txtMarca" id="txtMarca" maxlength="50">
+            </p>
+            <p>
+                <label for="txtPreco">Preço:</label>
+                <input type="text" name="txtPreco" id="txtPreco">
+            </p>
+            <p>
+                <input type="submit" value="Salvar">
+            </p>      
+        </form>
+    </body>
+</html>
