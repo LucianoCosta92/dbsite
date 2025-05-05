@@ -1,4 +1,4 @@
-<%@page import="javax.swing.JOptionPane"%>
+<%@page import="java.math.BigDecimal"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.SQLException"%>
@@ -13,13 +13,14 @@
     <body>
         <%
             int codigo;
-            String nome, marca;
-            double preco;
+            String nome, marca, precoString;
 
             codigo = Integer.parseInt(request.getParameter("txtCod"));
-            nome = request.getParameter("txtNome");
-            marca = request.getParameter("txtMarca");
-            preco = Double.parseDouble(request.getParameter("txtPreco"));
+            nome = request.getParameter("txtNome").trim();
+            marca = request.getParameter("txtMarca").trim();
+            precoString = request.getParameter("txtPreco").trim();
+            
+            BigDecimal preco = new BigDecimal(precoString);
 
             try {
                 Connection conecta;
@@ -32,11 +33,11 @@
                 pst.setInt(1, codigo);
                 pst.setString(2, nome);
                 pst.setString(3, marca);
-                pst.setDouble(4, preco);
+                pst.setBigDecimal(4, preco);
 
                 pst.executeUpdate();
                 out.print("Produto cadastrado com sucesso!");
-            } catch (Exception e) {
+            } catch (SQLException e) {
                 out.print("Erro:" + e);
             }
 
