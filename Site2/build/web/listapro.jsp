@@ -9,6 +9,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Listagem de produtos</title>
+        <link rel="stylesheet" href="tabela.css">
     </head>
     <body>
         <%
@@ -20,12 +21,12 @@
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbsite", "root", "Kamenriderv3");
 
-                pst = conecta.prepareStatement("select * from produto");
+                pst = conecta.prepareStatement("select * from produto order by nome");
                 rs = pst.executeQuery();
         %>
-        <table border="1">
+        <table>
             <tr>
-                <th>Código</th><th>Nome</th><th>Marca</th><th>Preço</th>
+                <th>Código</th><th>Nome</th><th>Marca</th><th>Preço</th><th>Exclusão</th>
             </tr>
             <%
                 while (rs.next()) {
@@ -35,6 +36,7 @@
                 <td><%= rs.getString("nome")%></td>
                 <td><%= rs.getString("marca")%></td>
                 <td><%= rs.getString("preco")%></td>
+                <td><a href="excluir_produtos.jsp?txtCod=<%= rs.getString("codigo")%>">Excluir</td>
             </tr>         
             <%
                     }

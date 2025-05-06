@@ -8,23 +8,23 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Cadastro de produtos</title>
     </head>
     <body>
         <%
             int codigo;
-            String nome, marca, precoString;
+            String nome, marca;
+            BigDecimal preco;
 
             codigo = Integer.parseInt(request.getParameter("txtCod"));
             nome = request.getParameter("txtNome").trim();
             marca = request.getParameter("txtMarca").trim();
-            precoString = request.getParameter("txtPreco").trim();
-            
-            BigDecimal preco = new BigDecimal(precoString);
+            preco = new BigDecimal(request.getParameter("txtPreco"));
+
+            Connection conecta = null;
+            PreparedStatement pst = null;
 
             try {
-                Connection conecta;
-                PreparedStatement pst;
 
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbsite", "root", "Kamenriderv3");
@@ -36,9 +36,17 @@
                 pst.setBigDecimal(4, preco);
 
                 pst.executeUpdate();
-                out.print("Produto cadastrado com sucesso!");
+                out.print("<p style='color:blue'; font-size:15px>Produto cadastrado com sucesso!</p>");
             } catch (SQLException e) {
-                out.print("Erro:" + e);
+                String erro = e.getMessage();
+                if (erro.contains("Duplicate entry")) {
+                    out.print("<p style='color:blue'; font-size:15px>Este produto já está cadastrado!</p>");
+                } else {
+                    out.print("<p style='color:blue'; font-size:15px>Entre em contato com o suporte e informe o erro: " + erro + "</p>");
+                }
+            } finally{
+                pst.close();
+                conecta.close();
             }
 
 

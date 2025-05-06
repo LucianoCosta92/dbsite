@@ -9,11 +9,11 @@
         <form method="post" action="salvar_produtos.jsp">
             <p>
                 <label for="txtCod">Código:</label>
-                <input type="text" name="txtCod" id="txtCod">
+                <input type="number" name="txtCod" id="txtCod" required>
             </p>
             <p>
                 <label for="txtNome">Nome do produto:</label>
-                <input type="text" name="txtNome" id="txtNome" size="50" maxlength="50">
+                <input type="text" name="txtNome" id="txtNome" size="50" maxlength="50" required>
             </p>
             <p>
                 <label for="txtMarca">Marca do produto:</label>
@@ -21,7 +21,7 @@
             </p>
             <p>
                 <label for="txtPreco">Preço:</label>
-                <input type="text" name="txtPreco" id="txtPreco">
+                <input type="number" step="0.1" name="txtPreco" id="txtPreco">
             </p>
             <p>
                 <input type="submit" value="Salvar">
