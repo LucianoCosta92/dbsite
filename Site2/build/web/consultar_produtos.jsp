@@ -8,7 +8,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Listagem de produtos</title>
+        <title>Consulta de produtos</title>
         <link rel="stylesheet" href="tabela.css">
     </head>
     <body>
@@ -17,11 +17,14 @@
             PreparedStatement pst = null;
             ResultSet rs = null;
             
+            String nome = request.getParameter("txtNome");
+
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbsite", "root", "Kamenriderv3");
 
-                pst = conecta.prepareStatement("select * from produto order by nome");
+                pst = conecta.prepareStatement("select * from produto where nome like ? order by nome");
+                pst.setString(1, "%" + nome + "%");
                 rs = pst.executeQuery();
         %>
         <table>
