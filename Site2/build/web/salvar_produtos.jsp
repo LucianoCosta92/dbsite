@@ -36,7 +36,7 @@
                 pst.setBigDecimal(4, preco);
 
                 pst.executeUpdate();
-                out.print("<p style='color:blue'; font-size:15px>Produto cadastrado com sucesso!</p>");
+                out.print("<p style='color:blue'; font-size:15px>Produto de código <strong>" + codigo + "</strong> cadastrado com sucesso!</p>");
             } catch (SQLException e) {
                 String erro = e.getMessage();
                 if (erro.contains("Duplicate entry")) {
